@@ -24,7 +24,7 @@ const SetupEC2 = () => {
     });
   }
 
-  function getTodosActiveWithFilter(isActive) {
+  function getTodosActiveInactiveWithFilter(isActive) {
     getTodosServiceWithFilter(isActive).then((todosList) => {
       setTodos(todosList.items);
     });
@@ -42,7 +42,7 @@ const SetupEC2 = () => {
   }
 
   useEffect(() => {
-    getTodosActiveWithFilter("Active");
+    getTodosActiveInactiveWithFilter("Active");
     setupSubscriptions();
     return () => {
       subscriptionOnCreate.unsubscribe();
@@ -60,14 +60,14 @@ const SetupEC2 = () => {
           label="Stopped EC2"
           variant="outlined"
           size="small"
-          gridCallBackButtonFilter={getTodosActiveWithFilter}
+          gridCallBackButtonFilter={getTodosActiveInactiveWithFilter}
         />
         <ButtonFilter 
           statusEC2='Active'
           label="Active EC2"
           variant="outlined"
           size="medium"
-          gridCallBackButtonFilter={getTodosActiveWithFilter}
+          gridCallBackButtonFilter={getTodosActiveInactiveWithFilter}
         />
         <ButtonFilter 
           label="All EC2"

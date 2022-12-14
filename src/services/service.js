@@ -52,13 +52,13 @@ export function getTodosMapService(todos) {
 
 export function getNumberMachineActiveInactiveService(todos, name, typeStatus) {
   const todosOrderByName = [...new Set(todos)].sort();
-  const todosInactiveMap = new Map(
+  const todosActiveInactiveMap = new Map(
     todosOrderByName.map((i) => [
       i.name,
       countTodosActiveInactive(i.name, typeStatus, todosOrderByName),
     ])
   );
-  return todosInactiveMap.get(name);
+  return todosActiveInactiveMap.get(name);
 }
 
 
