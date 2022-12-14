@@ -52,9 +52,7 @@ const SetupEC2 = () => {
 
   return (
     <>
-      <FormEC2 
-        gridCallBackFormEC2={insertTodoService}
-      />
+     
       <br />
       <Box sx={{ "& button": { m: 1 } }}>
         <ButtonFilter
