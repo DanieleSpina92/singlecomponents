@@ -1,45 +1,53 @@
-import { Box } from "@mui/material";
-import React from "react";
-import ButtonFilter from "../buttons/ButtonFilter";
-import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
-import SportsRugbyIcon from "@mui/icons-material/SportsRugby";
-import SportsTennisIcon from "@mui/icons-material/SportsTennis";
+import React, { useState } from "react";
+import InternalNavbar from "../navbar/InternalNavbar";
+
 const Mytask = () => {
-  function getTodosActive(isActive) {}
+
+  const listLinks = ["Today", "Tomorrow", "This Week" ]
+  const [showToday, setToday] = useState(true)
+  const [showTomorrow, setTomorrow] = useState(false)
+  const [showThisWeek, setThisWeek] = useState(false)
 
   return (
-    <div style={{backgroundColor: '#AADB1E'}}>
-      <Box sx={{ "& button": { m: 1 } }}>
-        <ButtonFilter
-          style={{ borderRadius: "50%", border: "none" }}
-          startIcon={<SportsSoccerIcon />}
-          statusEC2="Stopped"
-          //label="Stopped EC2"
-          variant="outlined"
-          size="small"
-          gridCallBackButtonFilter={getTodosActive}
-        />
-        <ButtonFilter
-          style={{ borderRadius: "50%", border: "none" }}
-          startIcon={<SportsRugbyIcon />}
-          statusEC2="Stopped"
-          //label="Stopped EC2"
-          variant="outlined"
-          size="small"
-          gridCallBackButtonFilter={getTodosActive}
-        />
-        <ButtonFilter
-          style={{ borderRadius: "50%", border: "none" }}
-          startIcon={<SportsTennisIcon />}
-          statusEC2="Stopped"
-          //label="Stopped EC2"
-          variant="outlined"
-          size="small"
-          gridCallBackButtonFilter={getTodosActive}
-        />
-      </Box>
+    <div>
+      <InternalNavbar elements={listLinks} action={internalActive}></InternalNavbar>
+      {
+        showToday &&
+        <div>Component Today</div>
+      }
+      {
+        showTomorrow &&
+        <div>Component Tomorrow</div>
+      }
+      {
+        showThisWeek &&
+        <div>Component This Link</div>
+      }
     </div>
   );
+
+
+  function internalActive(text) {
+    switch (text) {
+      case listLinks[0]:
+        setToday(true)
+        setTomorrow(false)
+        setThisWeek(false)
+        break;
+      case listLinks[1]:
+        setToday(false)
+        setTomorrow(true)
+        setThisWeek(false)
+        break;
+      case listLinks[2]:
+        setToday(false)
+        setTomorrow(false)
+        setThisWeek(true)
+        break;
+      default:
+        break;
+    }
+  }
 };
 
 export default Mytask;

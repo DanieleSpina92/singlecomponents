@@ -13,7 +13,7 @@ const SetupDashboardItemEC2 = ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
    ...theme.typography.body2,
     padding: theme.spacing(1),
-   textAlign: "center",
+   // textAlign: "center",
    marginRight: '30px',
    color: theme.palette.text.secondary,
     height: '120px',

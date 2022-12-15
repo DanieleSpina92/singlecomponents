@@ -7,7 +7,7 @@ import {
   getTodosService,
   getTodosMapService,
   getNumberMachineActiveInactiveService,
-} from "../../services/service";
+} from "../../services/serviceDb";
 
 const DashboardEC2 = () => {
   const [todos, setTodos] = useState([]);

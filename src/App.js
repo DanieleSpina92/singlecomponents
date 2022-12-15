@@ -1,12 +1,10 @@
-import React from 'react'
-import Navbacontainer from './component/navbar/Navbacontainer'
+import React from "react";
+
 const App = () => {
-
+  
   return (
-    <> 
-      <Navbacontainer/>
-    </>
-  )
-}
+    <></>
+  );
+};
 
-export default App
+export default App;
