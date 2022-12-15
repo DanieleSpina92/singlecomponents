@@ -38,7 +38,6 @@ const CustomNavbar = () => {
              
           <div style={{textAlign: 'center', position: 'absolute', right: 0,  width: '100px'}}>
             <IconButton
-              
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"

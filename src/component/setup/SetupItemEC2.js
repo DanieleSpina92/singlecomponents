@@ -8,9 +8,8 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Person2Icon from "@mui/icons-material/Person2";
-import { updateTodo } from "../../graphql/mutations";
-import { API } from "aws-amplify";
-
+import { updateTodoService, deleteTodoService } from "../../services/serviceDb";
+import DeleteIcon from '@mui/icons-material/Delete';
 const SetupItemEC2 = ({ todo }) => {
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -20,22 +19,6 @@ const SetupItemEC2 = ({ todo }) => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-
-  async function updateTodoElement() {
-    try {
-      const todoDetails = {
-        id: todo.id,
-        _version: todo._version,
-        status: todo.status == "Active" ? "Stopped" : "Active",
-      };
-      const updatedTodo = await API.graphql({
-        query: updateTodo,
-        variables: { input: todoDetails },
-      });
-    } catch (err) {
-      console.log("error creating todo:", err);
-    }
-  }
 
   return (
     <Grid item xs={4}>
@@ -58,12 +41,12 @@ const SetupItemEC2 = ({ todo }) => {
             control={
               <Switch
                 checked={todo.status == "Active" ? true : false}
-                onClick={() => updateTodoElement()}
+                onClick={() => updateTodoService(todo)}
                 color={todo.status == "Active" ? "success" : "warning"}
               />
             }
           />
-          <div></div>
+          <DeleteIcon onClick={() => deleteTodoService(todo.id, todo._version)}></DeleteIcon>
         </FormGroup>
       </Item>
     </Grid>

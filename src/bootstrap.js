@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { Amplify } from 'aws-amplify';
-import awsconfig from './aws-exports';
+import { Amplify } from "aws-amplify";
+import awsconfig from "./aws-exports";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./component/admin/AdminEC2";
 import Mytask from "./component//task/Mytask";
@@ -14,11 +13,9 @@ Amplify.configure(awsconfig);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-
 root.render(
   <React.StrictMode>
-
-<Router>
+    <Router>
       <CustomNavbar />
       <Routes>
         <Route path="/mytask" element={<Mytask />} />
@@ -30,4 +27,3 @@ root.render(
     </Router>
   </React.StrictMode>
 );
-

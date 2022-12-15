@@ -6,7 +6,9 @@ import ButtonFilter from "../buttons/ButtonFilter";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import SportsRugbyIcon from "@mui/icons-material/SportsRugby";
 import SportsTennisIcon from "@mui/icons-material/SportsTennis";
+
 const Admin = () => {
+ 
   return (
     <>
       <Box sx={{ "& button": { m: 1 } }}>
@@ -14,16 +16,13 @@ const Admin = () => {
           style={{ borderRadius: "50%", border: "none" }}
           startIcon={<SportsSoccerIcon />}
           statusEC2="Stopped"
-          //label="Stopped EC2"
           variant="outlined"
           size="small"
-          
         />
         <ButtonFilter
           style={{ borderRadius: "50%", border: "none" }}
           startIcon={<SportsRugbyIcon />}
           statusEC2="Stopped"
-          //label="Stopped EC2"
           variant="outlined"
           size="small"
         />
@@ -31,7 +30,6 @@ const Admin = () => {
           style={{ borderRadius: "50%", border: "none" }}
           startIcon={<SportsTennisIcon />}
           statusEC2="Stopped"
-          //label="Stopped EC2"
           variant="outlined"
           size="small"
         />

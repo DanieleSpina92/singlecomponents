@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { onCreateTodo } from "../../graphql/subscriptions";
+import { onUpdateTodo, onDeleteTodo } from "../../graphql/subscriptions";
 import { Grid } from "@mui/material";
 import SetupDashboardItemEC2 from "./DashboardItemEC2";
 import {
   getTodosService,
   getTodosMapService,
   getNumberMachineActiveInactiveService,
+  insertTodoSubscriptionService
 } from "../../services/serviceDb";
 
 const DashboardEC2 = () => {
@@ -18,13 +19,38 @@ const DashboardEC2 = () => {
     getTodosService().then((todosList) => {
       setTodos(todosList.items);
     });
+    
   }
 
   /* PARTE SUBSCRIPTION */
   let subscriptionOnCreate;
+  let subscriptionOnDelete;
+  let subscriptionOnUpdate;
+
+
   function setupSubscriptions() {
-    subscriptionOnCreate = API.graphql(
+    insertTodoSubscriptionService(todos)
+  }
+
+  function setupSubscriptions2() {
+   /* subscriptionOnCreate = API.graphql(
       graphqlOperation(onCreateTodo)
+    ).subscribe({
+      next: (todo) => {
+        setTodos([...todos, todo]);
+      },
+    });
+    */
+    subscriptionOnDelete = API.graphql(
+      graphqlOperation(onDeleteTodo)
+    ).subscribe({
+      next: (todo) => {
+        setTodos([...todos, todo]);
+      },
+    });
+
+    subscriptionOnUpdate = API.graphql(
+      graphqlOperation(onUpdateTodo)
     ).subscribe({
       next: (todo) => {
         setTodos([...todos, todo]);
@@ -33,10 +59,14 @@ const DashboardEC2 = () => {
   }
 
   useEffect(() => {
-    getTodos();
-    setupSubscriptions();
+    getTodos()
+    
+    // console.log('lista: ', getTodos());
+
     return () => {
-      subscriptionOnCreate.unsubscribe();
+     // subscriptionOnCreate.unsubscribe();
+     // subscriptionOnDelete.unsubscribe();
+     // subscriptionOnUpdate.unsubscribe();
     };
   }, []);
 
@@ -49,6 +79,7 @@ const DashboardEC2 = () => {
           spacing={3}
           style={{ display: "flex", marginTop: "50px" }}
         >
+ 
           {todosNames.map((todoName, index) => (
             <h3 key={index}>
               <SetupDashboardItemEC2
