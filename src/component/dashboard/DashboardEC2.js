@@ -27,20 +27,7 @@ const DashboardEC2 = () => {
   let subscriptionOnDelete;
   let subscriptionOnUpdate;
 
-
-  function setupSubscriptions() {
-    insertTodoSubscriptionService(todos)
-  }
-
   function setupSubscriptions2() {
-   /* subscriptionOnCreate = API.graphql(
-      graphqlOperation(onCreateTodo)
-    ).subscribe({
-      next: (todo) => {
-        setTodos([...todos, todo]);
-      },
-    });
-    */
     subscriptionOnDelete = API.graphql(
       graphqlOperation(onDeleteTodo)
     ).subscribe({
@@ -58,13 +45,15 @@ const DashboardEC2 = () => {
     });
   }
 
+  function callBackFunction(todo) {
+    setTodos([...todos, todo]);
+  }
+
   useEffect(() => {
     getTodos()
-    
-    // console.log('lista: ', getTodos());
-
+    subscriptionOnCreate = insertTodoSubscriptionService(callBackFunction)
     return () => {
-     // subscriptionOnCreate.unsubscribe();
+     subscriptionOnCreate.unsubscribe();
      // subscriptionOnDelete.unsubscribe();
      // subscriptionOnUpdate.unsubscribe();
     };

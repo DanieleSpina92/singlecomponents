@@ -7,18 +7,17 @@ import { onCreateTodo, onUpdateTodo, onDeleteTodo } from "../graphql/subscriptio
 
 
 // onCreateTodo
-export async function insertTodoSubscriptionService(todos) {
-  console.log('sono in subscription');
+export function insertTodoSubscriptionService(callBackFunction) {
   let subscriptionOnCreate;
   try {
     subscriptionOnCreate = API.graphql(
       graphqlOperation(onCreateTodo)
     ).subscribe({
       next: (todo) => {
-       // setTodos([...todos, todo]);
+       callBackFunction(todo)
       },
     });
-    subscriptionOnCreate.unsubscribe();
+    return subscriptionOnCreate;
   } catch (err) {
     console.log("error fetching todos: ", err);
   }
@@ -85,6 +84,7 @@ export async function deleteTodoService(id, version) {
 }
 
 /************** QUERIES ***************************/
+
 export async function getTodosService() {
   try {
     const todoData = await API.graphql(graphqlOperation(listTodos));
